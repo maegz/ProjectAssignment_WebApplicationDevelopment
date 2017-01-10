@@ -8,8 +8,6 @@
 "use strict";
 
 
-var gameID = {};
-
 $(document).ready(function() {
     $("button").click(function() {
         var userInput = $("input").val();
@@ -17,21 +15,54 @@ $(document).ready(function() {
     });
 });
 
-// Get all games connected with the users input.
+// Get top 10 games connected with the users input.
 function getUserInput(input) {
     $.ajax({
         // Get users input for the API URL to get games.
-        url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search=" + input, // The URL to the API.
+        url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=*&search=" + input, // The URL to the API.
         type: 'GET', // The HTTP Method
         data: {}, // Additional parameters here
         dataType: 'json',
         // If it works, each object appends to the list-element with the ID and Name.
         success: function(data) {
+            console.log(data);
+            // Clear the dropdown list each time the user searches for a new game.
             $("ul").html("");
+            // Add game-id and name to the list.
             for (var i in data) {
                 $("ul").append("<li id=" + data[i].id +">" + data[i].name + "</li>").hide().slideDown();
             }
-            getChosenGameImage();
+            $("li").click(function() {
+                $("ul").slideUp();
+                $(".carousel-indicators").html("");
+                $(".carousel-inner").html("");
+                // Get all objects in data-array
+                for (var i in data) {
+                    // If the arrays id-object is the same as the clicked li-id..
+                    if (data[i].id == this.id) {
+                        $(".mainText").html(data[i].name);
+                        $(".backgroundImage").css("background-image", "url(https://images.igdb.com/igdb/image/upload/" + data[i].screenshots[0].cloudinary_id + ".png)").hide().fadeIn(1000);
+                        // Get all the objects in the screenshots-array. Add them to the carousel.
+                        for (var j in data[i].screenshots) {
+                            if (j == 0) {
+                                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + j + " class='active'></li>");
+                                $(".carousel-inner").append("<div class='item active'><img src='https://images.igdb.com/igdb/image/upload/t_screenshot_med_2x/" + data[i].screenshots[j].cloudinary_id + ".jpg'><div>");
+                            } else {
+                                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + j + "></li>");
+                                $(".carousel-inner").append("<div class='item'><img src='https://images.igdb.com/igdb/image/upload/t_screenshot_med_2x/" + data[i].screenshots[j].cloudinary_id + ".jpg'><div>");
+                            }
+
+                        }
+                        // If the game doesn't have a summary, print out a different text.
+                        if (data[i].summary === undefined) {
+                            $(".infoText").html("Sorry, the summary of this game doesn't exist on IGDB. :(").hide().slideDown();
+                        } else {
+                            $(".infoText").html(data[i].summary).hide().slideDown();
+                        }
+                    }
+                }
+            });
+            // getChosenGameImage();
         },
         error: function(err) { alert(err); },
         beforeSend: function(xhr) {
@@ -44,7 +75,6 @@ function getUserInput(input) {
 // Create click-function for each list-object.
 function getChosenGameImage() {
     $("li").click(function() {
-        $(".ul").children().fadeOut(200);
         var liID = this.id;
         var liName = this.innerHTML;
         // Get clicked object for the API URL to get images.
@@ -67,7 +97,7 @@ function getChosenGameImage() {
                     // Change all whitespace to "%20" for the HTML-search.
                     var infoTextCorrector = liName.replace(/\s/g, "%20");
                     $(".infoText").html("<a>Click Here!</a>");
-                    var gameInfoTextAll = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + infoTextCorrector;
+                    var gameInfoTextAll = "https://en.wikipedia.org/w/api.php?format=json&srwhat=nearmatch&action=query&prop=extracts&exintro=&explaintext=&titles=" + infoTextCorrector;
 
                     $(".infoText").click(function() {
                         $.ajax({
