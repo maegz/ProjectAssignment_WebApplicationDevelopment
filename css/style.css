@@ -1,0 +1,28 @@
+body { background-color: rgba(55, 55, 55, 0.7); }
+
+nav { background-color: rgba(55, 55, 55, 0.7); }
+
+.container { padding-top: 10px; color: red; }
+
+input, button { border-radius: 15%; padding-left: 10px; }
+
+/*.jumbotron { background-color: rgba(0, 0, 0, 0.0); padding-left: 0; padding-right: 0;}*/
+
+.backgroundImage {
+    margin-top: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    /*width: 100%;*/
+    background-position: center;
+    filter: blur(3px);
+}
+
+.mainText {
+    z-index: 1;
+    /*width: 100%;*/
+    position: absolute;
+    text-align: center;
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
