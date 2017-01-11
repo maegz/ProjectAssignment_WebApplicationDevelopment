@@ -4,7 +4,7 @@ Web application development with AJAX, JSON, jQuery, JS, HTML, CSS
     About:
         Me:
             Maximilian Sundberg
-            [My LinkedIn-page](https://se.linkedin.com/in/maegz "Maegz LinkedIn-page")
+            LinkedIn-page: https://se.linkedin.com/in/maegz
         Course:
             Web application development at Lernia YHJUST16
 
@@ -24,12 +24,11 @@ Web application development with AJAX, JSON, jQuery, JS, HTML, CSS
         Ajax
 
     APIs:
-        [Internet Game Database (IGDB)](https://igdb.github.io/api/about/welcome/ "IGDB")
+        Internet Game Database (IGDB): https://igdb.github.io/api/about/welcome/
 
-        [MediaWiki for Wikipedia](https://www.mediawiki.org/wiki/API:Main_page "MediaWiki")
+        MediaWiki for Wikipedia: https://www.mediawiki.org/wiki/API:Main_page
 
 
-<!-- x    kortfattat din arbetsprocess (mobile first eller ngt annat) och som resonerar om vad du gjort bra och vad som kan förbättras -->
     Work process:
         First of all I had to find an interesting API that would appeal to me. I checked through Mashape and finally stumbled on the IGDB API
         and directly thought it would fit. It would be a challenge of different methods to take out all the different parts of the game info
