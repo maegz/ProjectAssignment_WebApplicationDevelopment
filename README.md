@@ -2,10 +2,10 @@
 <h2>Web application development with AJAX, JSON, jQuery, JS, HTML, CSS</h2>
 
 <h3>About:</h3>
-    <b>Me:</b>
+    Me:
         Maximilian Sundberg
-        <a href="https://se.linkedin.com/in/maegz">My LinkedIn-page</a>
-    <b>Course:</b>
+        LinkedIn-page: https://se.linkedin.com/in/maegz
+    Course:
         Web application development at Lernia YHJUST16
 
 <h3>Link to live project:</h3>
@@ -17,13 +17,11 @@
     and then be able to get information about the games in text and images.
 
 <h3>Technologies I've used:</h3>
-    <ul>
-	<li>HTML5</li>
-    <li>CSS</li>
-    <li>Bootstrap</li>
-    <li>JavaScript with jQuery</li>
-    <li>Ajax</li>
-	</ul>
+	HTML5
+	CSS
+	Bootstrap
+	JavaScript with jQuery
+	Ajax
 
 <h3>APIs:</h3>
     Internet Game Database (IGDB): https://igdb.github.io/api/about/welcome/
