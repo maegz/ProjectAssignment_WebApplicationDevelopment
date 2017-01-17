@@ -12,42 +12,41 @@
 		<link id="pagestyle" rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<nav class="navbar navbar-fixed-top" role="navigation">
-		  <div class="container">
-			  <input type="text">
-			  <button type="button" name="button">click here</button>
-			  <ul></ul>
-		  </div>
-		</nav>
 		<div class="container">
+			<nav class="navbar navbar-fixed-top" role="navigation">
+				<div class="container">
+					<input type="text">
+					<button type="button" name="button">click here</button>
+					<ul></ul>
+				</div>
+			</nav>
+				<img id="loadImage" src="http://i.imgur.com/yM5pI7W.gif" class="img-responsive" style="display: none"/>
 			<div class="jumbotron">
 				<div class="mainText"></div>
 				<div class="backgroundImage"></div>
 			</div>
+			<div class="infoText"></div>
+			<div id="carousel-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<!-- Temporary indicator, otherwise Bootstrap says something wrong -->
+					<li data-target='#carousel-generic' data-slide-to=0 class='active'></li>
+				</ol>
 
-		<div id="carousel-generic" class="carousel slide" data-ride="carousel">
-		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
-		    <!-- <li data-target="#carousel-generic" data-slide-to="0" class="active"></li> -->
-		    <!-- <li data-target="#carousel-generic" data-slide-to="1"></li>
-		    <li data-target="#carousel-generic" data-slide-to="2"></li> -->
-		  </ol>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+					<!-- Temporary carousel-item, otherwise Bootstrap says something wrong -->
+					<div class='item active'></div>
+				</div>
 
-		  <!-- Wrapper for slides -->
-		  <div class="carousel-inner">
-
-		  </div>
-
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left"></span>
-		  </a>
-		  <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right"></span>
-		  </a>
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-generic" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a class="right carousel-control" href="#carousel-generic" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
 		</div>
-	</div>
-		<div class="screenshots"></div>
-		<div class="infoText"></div>
 	</body>
 </html>
