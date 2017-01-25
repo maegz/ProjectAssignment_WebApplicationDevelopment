@@ -1,3 +1,5 @@
+ @font-face { font-family: HeaderFont; src: url('../fonts/CGF Locust Resistance.ttf'); }
+
 body {
     color: white;
     /*background-color: black;*/
@@ -38,6 +40,9 @@ nav {
     transform: translate(-50%, -50%);
     z-index: 3;
 }
+.titleText h2 {
+    position: relative;
+}
 
 .jumbotron {
     display: none;
@@ -58,15 +63,15 @@ nav {
         width: 700px;
         transform: translate(-50%, -50%);
         z-index: 1;
-
-        font-family: CGF Locust resistance;
+        font-family: HeaderFont;
+        /*font-family: CGF Locust resistance;*/
         text-align: center;
         top: 30%;
         background-color: rgba(255, 255, 255, 0.8);
         color: black;
     }
     .titleText h2 {
-        position: absolute;
+        /*position: absolute;*/
         top: 250px;
         width: 100%;
     }

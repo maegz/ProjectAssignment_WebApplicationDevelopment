@@ -1,9 +1,11 @@
 "use strict";
 
+
+// Use the GiantBomb API to get the user input-name, and show all the results similar to that name (maximum 10).
 function API_getUserInput(input) {
     $.ajax({
         type: "GET",
-        url: "http://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
+        url: "https://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
@@ -18,10 +20,12 @@ function API_getUserInput(input) {
     });
 }
 
+
+// Use the GiantBomb API to get the images from the gameID.
 function API_getGameImages(gameID) {
     $.ajax({
         type: "GET",
-        url: "http://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
+        url: "https://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
@@ -38,23 +42,8 @@ function API_getGameImages(gameID) {
     });
 }
 
-function API_getGameImagesFromWebSearch() {
-    $.ajax({
-        url: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + $(".titleText").text() + "+gameplay&count=10&aspect=wide&size=large",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $(".backgroundImage").css("background-image", "url(" + data.value[0].contentUrl + ")").hide().fadeIn(2000);
-            console.log(data.value);
-            showImages(data.value);
-        },
-        error: function(err) { console.log(err); },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "6e0a34bcb1b64e449022c55f26f66813"); // Enter here your Mashape key
-        }
-    })
-}
 
+// Use the Bing API to get the first (game name + wikipedia) result as a link.
 function API_getGameInfoIfNotExisting(gameName) {
     $.ajax({
         url: "https://api.cognitive.microsoft.com/bing/v5.0/search?q=" + gameName + "+wikipedia&mkt=en-us",
@@ -76,6 +65,25 @@ function API_getGameInfoIfNotExisting(gameName) {
         error: function(err) { console.log(err); },
         beforeSend: function(xhr) {
             xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "eab7bca2c7ec405eb83dcb524eb3cc76");
+        }
+    })
+}
+
+
+// Use the Bing API to find the first 10 images of (game title + gameplay) results.
+function API_getGameImagesFromWebSearch() {
+    $.ajax({
+        url: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + $(".titleText").text() + "+gameplay&count=10&aspect=wide&size=large",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $(".backgroundImage").css("background-image", "url(" + data.value[0].contentUrl + ")").hide().fadeIn(2000);
+            console.log(data.value);
+            showImages(data.value);
+        },
+        error: function(err) { console.log(err); },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "6e0a34bcb1b64e449022c55f26f66813");
         }
     })
 }

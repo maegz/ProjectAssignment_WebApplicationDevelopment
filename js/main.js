@@ -5,11 +5,12 @@
 
 
 $(document).ready(function() {
-
+    // Start with fading in intro objects.
     $(".jumbotron").fadeIn(1500, function() {
         $("nav").fadeIn(1000);
     });
 
+    // Clicking the button starts the loading image and sends the user input to the GiantBomb API.
     $("button").click(function() {
 		$("#loadingImage").fadeIn();
         var userInput = $("input").val();
@@ -28,10 +29,10 @@ $(document).ready(function() {
     $("#showBox").mouseenter(function(){ $("#infoBox").slideDown(); });
     // Remove information when mouse leaves the questionmark.
     $("#showBox").mouseleave(function(){ $("#infoBox").slideUp(); });
-
 });
 
 
+// Dynamically generated dropdown-list.
 function showDropDownList(game) {
     $("#loadingImage").fadeOut();
     if (game.length === 0) {
