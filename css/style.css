@@ -1,74 +1,151 @@
-body, nav, .infoText { background-color: rgba(55, 55, 55, 0.7); }
+body {
+    color: white;
+    /*background-color: black;*/
+/*}
 
-.container { padding-top: 15px; color: red; width: 80%; }
+#pageBackground {*/
+    /*width: 200%;
+    height: 200%;*/
+    background-image: url("../images/background2.jpg");
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+nav, input, button, .infoText { background-color: rgba(0, 0, 0, 0.9); }
+/*nav, input, button, .infoText { background-color: rgba(55, 55, 55, 0.7); }*/
+
+.container { padding-top: 15px; /*color: white;*/ width: 100%; }
 
 input, button { border-radius: 15%; padding-left: 10px; }
 
-/*.jumbotron { background-color: rgba(0, 0, 0, 0.0); padding-left: 0; padding-right: 0;}*/
+nav {
+    width: 100%;
+}
+
+#infoBox {
+    text-align: center;
+    transform: translate(0%, 0%);
+}
+
+#loadingImage, .titleText h1, .titleText h2, .titleText h3 {
+    position: fixed;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
 
 .jumbotron {
+    display: none;
     margin-top: 25px;
     padding: 0;
     background: none;
+    }
+    .backgroundImage {
+        margin-top: 50px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 500px;
+        width: 100%;
+        background-position: center;
+        filter: blur(2px);
+    }
+    .titleText h1, .titleText h2, .titleText h3 {
+        width: 700px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+
+        font-family: CGF Locust resistance;
+        text-align: center;
+        top: 30%;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: black;
+    }
+    .titleText h2 {
+        position: absolute;
+        top: 250px;
+        width: 100%;
+    }
+    .titleText h1 {
+        border-top-right-radius: 80px;
+        border-bottom-left-radius: 50px;
+    }
+    .titleText h3 {
+        width: 300px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        font-size: 15px;
+        margin-top: 7em;
 }
 
-.backgroundImage {
-    margin-top: 50px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 500px;
-    background-position: center;
-    filter: blur(3px);
+.infoText h2:hover, #navDropdownList li:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-.mainText {
-    z-index: 1;
-    width: 30%;
-    position: absolute;
-    text-align: center;
-    margin-top: 50px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+.infoText {
+    font-weight: bold;
+    }
+    .infoText h1 {
+        text-align: center;
+    }
+    .infoText img, .infoText table {
+        margin: auto;
 }
-#loadImage {
-    position: absolute;
-    margin: 0 auto;
-    z-index: 9999;
 
-}
 #carousel-generic {
+    margin: 1em;
     display: none;
     background: none;
-}
-.carousel-inner, .carousel-inner > .item > img {
-    /*min-width: 819px;*/
-    /*min-height: 536px;*/
-    width: 100%;
-    /*height: 537px;*/
-    max-height: 600px;
-    /*max-width: 820px;*/
-    /*margin-left: 25%;*/
-    /*border-top-left-radius: 10px;
-    border-top-right-radius: 10px;*/
-}
-.carousel-control.left, .carousel-control.right {
-    /*border-top-left-radius: 10px;
-    border-top-right-radius: 10px;*/
-}
-/*.item img {*/
-    /*margin-top: 50px;*/
-    /*width: 817px;*/
-    /*max-height: 500px;*/
-    /*min-height: 537px;*/
-/*}*/
-.item {
-    /*height: 600px;*/
-}
-.infoText {
-    border-bottom-left-radius: 19px;
-    border-bottom-right-radius: 19px;
-    color: black;
-    font-weight: bold;
-    text-align: center;
+    }
+    .carousel-inner, .carousel-inner > .item > img {
+        margin: auto;
+        width: auto;
+        height: 400px;
+    }
+    .carousel-inner {
+        margin-bottom: 50px;
+    }
+    .carousel-indicators {
+        bottom: -50px;
+    }
+
+@media (max-width: 700px) {
+    #infoBox {
+        /*padding: 0;*/
+        /*padding-bottom: 100%;*/
+    }
+    #loadingImage {
+        height: 100px;
+        width: 100px;
+    }
+    .backgroundImage {
+        height: 200px;
+    }
+    .titleText h1, .titleText h2 .titleText h3 {
+        width: 100%;
+        border-radius: 0;
+    }
+    .titleText h1 {
+        font-size: 25px;
+        margin-top: 5em;
+    }
+    .titleText h2 {
+        margin-top: -4em;
+    }
+    .titleText h3 {
+        /*margin-top: 3em;*/
+        clear: both;
+        margin-top: 11em;
+    }
+    .carousel-inner > .item > img {
+        height: 250px;
+    }
+    .carousel-indicators {
+        bottom: -90px;
+    }
 }

@@ -1,125 +1,142 @@
 // BING key: 6e0a34bcb1b64e449022c55f26f66813
+// Giant Bomb key: b6a1aa5de5723bec079ca742a4dcdc29850cc623
 
 "use strict";
 
 
 $(document).ready(function() {
-    $("button").click(function() {
-		$("img").fadeIn();
-        var userInput = $("input").val();
-        showUserInput(userInput);
+
+    $(".jumbotron").fadeIn(1500, function() {
+        $("nav").fadeIn(1000);
     });
 
+    $("button").click(function() {
+		$("#loadingImage").fadeIn();
+        var userInput = $("input").val();
+        API_getUserInput(userInput);
+    });
     // If the user presses Enter, the button click function activates.
     $("input").keyup(function(event) {
         if (event.keyCode == 13) {
             $("button").click();
         }
     });
+
+    // Remove information when clicking within the nav-tag area
+    $("nav").mousedown(function() { $("#infoBox").fadeOut(); })
+    // Show information about page when mouse hovers over the questionmark.
+    $("#showBox").mouseenter(function(){ $("#infoBox").slideDown(); });
+    // Remove information when mouse leaves the questionmark.
+    $("#showBox").mouseleave(function(){ $("#infoBox").slideUp(); });
+
 });
 
-// Get top 10 games connected with the users input.
-function showUserInput(input) {
-    $.ajax({
-        // Get users input for the API URL to get games.
-        url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=*&search=" + input,
-        type: 'GET',
-        dataType: 'json',
-        // If it works, each object appends to the list-element with the ID and Name.
-        success: function(data) {
-			$("img").fadeOut();
-            if (data.length === 0) {
-                $("ul").html("").append("<li>Sorry, couldn't find anything with that name. Try again...</li>").hide().slideDown();
-                console.log("Sorry, couldn't find anything with that name.");
-            } else {
-                // Clear the dropdown list each time the user searches for a new game.
-                $("ul").html("");
-                // Add game-id and name to the list.
-                for (var i in data) {
-                    $("ul").append("<li id=" + data[i].id +">" + data[i].name + "</li>").hide().slideDown();
+
+function showDropDownList(game) {
+    $("#loadingImage").fadeOut();
+    if (game.length === 0) {
+        $("#navDropdownList").html("").append("<li>Sorry, couldn't find anything with that name. Try again...</li>").hide().slideDown();
+    } else { // Clear the dropdown list each time the user searches for a new game.
+        $("#navDropdownList").html("");
+        for (var i in game) { // Add game-id and name to the list.
+            $("#navDropdownList").append("<li id=" + game[i].id +">" + game[i].name + "</li>").hide().slideDown();
+        }
+        showBackgroundAndTitleText(game);
+    }
+};
+
+
+function showBackgroundAndTitleText(game) {
+    $("li").click(function() {
+        // Hide or erase old information in order to create new.
+        $("#navDropdownList").slideUp();
+        $(".carousel-indicators").html("");
+        $(".carousel-inner").html("");
+        $("#loadingImage").fadeIn();
+        // Get all objects in data-array
+        for (var i in game) {
+            if (game[i].id == this.id) {
+                $(".titleText").html("<h2>" + game[i].name + "</h2>").hide();//.fadeIn(2000);
+                $(".backgroundImage").css("background-image", "url(" + game[i].image.super_url + ")").hide();//.fadeIn(2000);
+                API_getGameImages(game[i].id);
+                // console.log(game[i].description);
+                if (game[i].description != undefined && game[i].description.length > 50) {
+                    $(".infoText").html("<h1><b>Game information from GiantBomb about " +
+                        game[i].name + ":</b></h1><br>" + game[i].description).hide();//.children().hide();
+                    $(".titleText").fadeIn(2000);
+                    $(".backgroundImage").fadeIn(2000);
+                    $(".infoText").show().children().hide();
+                    $("h1").slideDown().nextUntil("h2").slideDown();
+                    $("h2").slideDown();
+                    $("h2").click(function() {
+                        $(this).nextUntil("h2").slideToggle();
+                    });
+                } else { // If the game doesn't have a summary, use the Bing API for getting the first search site as a link.
+                    API_getGameInfoIfNotExisting(game[i].name);
                 }
-                // Clicking on list-items.
-                $("li").click(function() {
-                    // Hide or erase old information in order to create new.
-                    $("ul").slideUp();
-                    $(".carousel-indicators").html("");
-                    $(".carousel-inner").html("");
-                    $("img").fadeIn();
-                    // Get all objects in data-array
-                    for (var i in data) {
-                        // If the arrays id-object is the same as the clicked li-id..
-                        if (data[i].id == this.id) {
-                            $(".mainText").html("<h2>" + data[i].name + "</h2>").hide().fadeIn(2000);
-                            getImages();
-                            $("img").fadeOut();
-                            if (data[i].summary != undefined) {
-                                $(".infoText").html("<h2>Summary from IGDB:</h2><br>" + data[i].summary).hide().fadeIn(2000);
-                            // If the game doesn't have a summary, use the Bing API for getting the first search site as a link.
-                            } else {
-                                getGameInfoIfNotExistingOnIGDB();
-                            }
-                        }
-                    }
-                });
+                    /*--------------------------------------------
+                    |                                            |
+                    |               FUNKAR INTE JU!!!!!          |
+                    |                                            |
+                    --------------------------------------------*/
+                                // var thisLink = $(".infoText a").attr("href");
+                                // if (thisLink.indexOf("giantbomb") != -1) {
+                                //     console.log("hej");
+                                //     var newLink = thisLink.substring(2);
+                                //     $(".infoText a").attr("href", "http//:" + newLink);
+                                //     console.log(newLink);
+                                // } else {
+                                //     console.log("funkar ej");
+                                // }
+                                    // });
+                                    // var theHref = $("a").attr("href");
+                                    // console.log(theHref);
+                                    // if (!theHref.contains("giantbomb")) {
+                                    //     console.log("fwernuir");
+                                    // }
+                                    // $(this).attr("href", theHref + "?format=bbbb");
+                                    // if ($("[href*='giantbomb']")) {
+                                    //     console.log("hej");
+                                    // }
+                                    // $("[attribute*='value']")
+                                    // if ($(this).contains('giantbomb')) {
+                                    //     console.log($(this));
+                                    //     console.log("hej");
+                                    // }
+                                    // var $addLastHref = $(this).attr("href");
+                                    // $(this).attr("href", "http://www.giantbomb.com" + $addLastHref);
+                                    // })
             }
-        },
-        error: function(err) { alert(err); },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("X-Mashape-Authorization", "UMH89mEtExmsh2p87keymPsDcroyp10qerijsnbcCdUmwMetfX"); // Enter here your Mashape key
         }
     });
 }
 
-function getImages() {
-    $.ajax({
-        url: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + $(".mainText").text() + "+gameplay&count=10&aspect=wide&size=large",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            console.log(data);
-            $(".backgroundImage").css("background-image", "url(" + data.value[0].contentUrl + ")").hide().fadeIn(2000);
-            $("#carousel-generic").hide().fadeIn(2000);
-            console.log(data.value);
-            for (var i in data.value) {
-                if (i == 0) {
-                    $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + " class='active'></li>");
-                    $(".carousel-inner").append("<div class='item active'><img src=" + data.value[i].contentUrl + "><div>").hide().fadeIn(2000);
-                } else {
-                    $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + "></li>");
-                    $(".carousel-inner").append("<div class='item'><img src=" + data.value[i].contentUrl + "><div>");
-                }
+
+function showImages(images) {
+    for (var i in images) {
+        if (images[i].super_url === undefined) {
+            if (i == 0) {
+                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + " class='active'></li>");
+                $(".carousel-inner").append("<div class='item active'><img src=" + images[i].contentUrl + "><div>").hide().fadeIn(2000);
+            } else {
+                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + "></li>");
+                $(".carousel-inner").append("<div class='item'><img src=" + images[i].contentUrl + "><div>");
+                $("#carousel-generic").hide().fadeIn();
             }
-        },
-        error: function(err) { console.log(err); },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "6e0a34bcb1b64e449022c55f26f66813"); // Enter here your Mashape key
+        } else {
+            if (i == 0) {
+                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + " class='active'></li>");
+                $(".carousel-inner").append("<div class='item active'><img src=" + images[i].super_url + "><div>").hide().fadeIn(2000);
+            } else {
+                $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + "></li>");
+                $(".carousel-inner").append("<div class='item'><img src=" + images[i].super_url + "><div>");
+                $("#carousel-generic").hide().fadeIn();
+            }
         }
-    })
+    }
+    $("#loadingImage").fadeOut(2000);
 }
 
-function getGameInfoIfNotExistingOnIGDB() {
-    $.ajax({
-        url: "https://api.cognitive.microsoft.com/bing/v5.0/search?q=" + $(".mainText").text() + "+wikipedia&mkt=en-us",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            console.log(data.webPages.value[0].url);
-            $(".infoText").html("<h2>Sorry, the summary of this game doesn't exist on IGDB.</h2><br><a id='infoLink' href=" + data.webPages.value[0].url + ">Click here for more info on another page</a>").hide().fadeIn(3000);
-            // If the user wants to be redirected to another page, the user must first accept it in a popup-window.
-            $("#infoLink").click(function() {
-                console.log("hej");
-                window.onbeforeunload = function() {
-                    window.onbeforeunload = null;
-                    return "Bye";
-                };
-            });
-        },
-        error: function(err) { console.log(err); },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "eab7bca2c7ec405eb83dcb524eb3cc76");
-        }
-    })
-}
 
 
 // api_key=UMH89mEtExmsh2p87keymPsDcroyp10qerijsnbcCdUmwMetfX
