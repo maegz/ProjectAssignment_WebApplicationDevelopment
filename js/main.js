@@ -10,7 +10,7 @@ $(document).ready(function() {
         $("nav").fadeIn(1000);
     });
 
-    // Clicking the button starts the loading image and sends the user input to the GiantBomb API.
+    // Clicking the button starts the loading image & sends the user input to the GiantBomb API.
     $("button").click(function() {
 		$("#loadingImage").fadeIn();
         var userInput = $("input").val();
@@ -39,7 +39,7 @@ function showDropDownList(game) {
         $("#navDropdownList").html("").append("<li>Sorry, couldn't find anything with that name. Try again...</li>").hide().slideDown();
     } else { // Clear the dropdown list each time the user searches for a new game.
         $("#navDropdownList").html("");
-        for (var i in game) { // Add game-id and name to the list.
+        for (var i in game) { // Add game-id & name to the list.
             $("#navDropdownList").append("<li id=" + game[i].id +">" + game[i].name + "</li>").hide().slideDown();
         }
         showBackgroundAndTitleText(game);
@@ -47,6 +47,7 @@ function showDropDownList(game) {
 };
 
 
+// Dynamically generated title & background-image.
 function showBackgroundAndTitleText(game) {
     $("li").click(function() {
         // Hide or erase old information in order to create new.
@@ -57,19 +58,19 @@ function showBackgroundAndTitleText(game) {
         // Get all objects in data-array
         for (var i in game) {
             if (game[i].id == this.id) {
-                $(".titleText").html("<h2>" + game[i].name + "</h2>").hide();//.fadeIn(2000);
-                $(".backgroundImage").css("background-image", "url(" + game[i].image.super_url + ")").hide();//.fadeIn(2000);
+                $(".titleText").html("<h2>" + game[i].name + "</h2>").hide();
+                $(".backgroundImage").css("background-image", "url(" + game[i].image.super_url + ")").hide();
                 API_getGameImages(game[i].id);
-                // console.log(game[i].description);
+
                 if (game[i].description != undefined && game[i].description.length > 50) {
-                    $(".infoText").html("<h1><b>Game information from GiantBomb about " +
-                        game[i].name + ":</b></h1><br>" + game[i].description).hide();//.children().hide();
-                    $(".titleText").fadeIn(2000);
-                    $(".backgroundImage").fadeIn(2000);
-                    $(".infoText").show().children().hide();
-                    $("h1").slideDown().nextUntil("h2").slideDown();
-                    $("h2").slideDown();
-                    $("h2").click(function() {
+                    $(".infoText").html("<h1><b>Game information from GiantBomb about " + // Info-text header.
+                        game[i].name + ":</b></h1><br>" + game[i].description).hide();
+                    $(".backgroundImage").fadeIn(2000, function() {
+                        $(".titleText").fadeIn(1000);
+                    });
+                    $(".infoText").show().children().hide(); // Show info-text, hide children.
+                    $("h1").slideDown().nextUntil("h2"); // Show info-text header & slide down content until next h2-tag
+                    $("h2").slideDown().click(function() { // Clicking on a h2-tag, slides down to the content until next h2-tag.
                         $(this).nextUntil("h2").slideToggle();
                     });
                 } else { // If the game doesn't have a summary, use the Bing API for getting the first search site as a link.
@@ -112,33 +113,33 @@ function showBackgroundAndTitleText(game) {
     });
 }
 
-
+// Depending on which API the images come from, different endpoints are created. Check it through an if-else statement.
 function showImages(images) {
     for (var i in images) {
+        // If the content comes from the Bing API.
         if (images[i].super_url === undefined) {
-            if (i == 0) {
+            if (i == 0) { // Create first (0) indicator & inner image for the carousel.
                 $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + " class='active'></li>");
                 $(".carousel-inner").append("<div class='item active'><img src=" + images[i].contentUrl + "><div>").hide().fadeIn(2000);
-            } else {
+            } else { // Create remaining indicators & inner images for the carousel.
                 $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + "></li>");
                 $(".carousel-inner").append("<div class='item'><img src=" + images[i].contentUrl + "><div>");
-                $("#carousel-generic").hide().fadeIn();
+                $("#carousel-generic").hide().fadeIn(function() {
+                    $("#loadingImage").fadeOut(2000);
+                });
             }
+        // If the content comes from the GiantBomb API.
         } else {
-            if (i == 0) {
+            if (i == 0) { // Create first (0) indicator & inner image for the carousel.
                 $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + " class='active'></li>");
                 $(".carousel-inner").append("<div class='item active'><img src=" + images[i].super_url + "><div>").hide().fadeIn(2000);
-            } else {
+            } else { // Create remaining indicators & inner images for the carousel.
                 $(".carousel-indicators").append("<li data-target='#carousel-generic' data-slide-to=" + i + "></li>");
                 $(".carousel-inner").append("<div class='item'><img src=" + images[i].super_url + "><div>");
-                $("#carousel-generic").hide().fadeIn();
+                $("#carousel-generic").hide().fadeIn(function() {
+                    $("#loadingImage").fadeOut(2000);
+                });
             }
         }
     }
-    $("#loadingImage").fadeOut(2000);
 }
-
-
-
-// api_key=UMH89mEtExmsh2p87keymPsDcroyp10qerijsnbcCdUmwMetfX
-// $.getJSON("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&limit=10&offset=0&order=release_dates.date%3Adesc&search=zelda",
