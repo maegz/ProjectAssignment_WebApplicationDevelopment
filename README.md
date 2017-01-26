@@ -8,7 +8,7 @@
   * Web application development at Lernia YHJUST16
 
 ### Link to live project:
-<a href="https://maegz.github.io/ProjectAssignment_WebApplicationDevelopment/games.html">GitHub Pages</a>
+[Gaze GitHub Page](https://maegz.github.io/ProjectAssignment_WebApplicationDevelopment/games.html "GitHub Pages")
 
 ### Short description of the project:
 I've decided to create a game search-engine.
