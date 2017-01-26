@@ -5,7 +5,7 @@
 function API_getUserInput(input) {
     $.ajax({
         type: "GET",
-        url: "http://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
+        url: "https://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
@@ -25,7 +25,7 @@ function API_getUserInput(input) {
 function API_getGameImages(gameID) {
     $.ajax({
         type: "GET",
-        url: "http://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
+        url: "https://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
