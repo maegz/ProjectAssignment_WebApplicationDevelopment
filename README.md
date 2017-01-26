@@ -64,3 +64,6 @@ No sir. When uploading the final result,
 I noticed that "Mixed Content" was something that was not liked according to the console.
 So now I'm officially stuck with that. I heard that it works if I upload everything to my own domain. Which I don't own.
 Well, well. I know that it works quite good. Locally..
+
+## Final update!
+I got it all to work using a free domain host. Named: Biz.nf. Feels very secure. Atleast it works!
