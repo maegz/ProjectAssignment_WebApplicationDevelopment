@@ -4,12 +4,12 @@ Web application development with AJAX, JSON, jQuery, JS, HTML, CSS
     About:
         Me:
             Maximilian Sundberg
-            [My LinkedIn-page](https://se.linkedin.com/in/maegz "Maegz LinkedIn-page")
+            <a href="https://se.linkedin.com/in/maegz">My LinkedIn</a>
         Course:
             Web application development at Lernia YHJUST16
 
     Link to live project:
-        xxxxx
+        <a href="https://maegz.github.io/ProjectAssignment_WebApplicationDevelopment/games.html>GitHub Page</a>
 
     Short description of the project:
         I've decided to create a game search-engine with the base of IGDB and Wikipedia.
