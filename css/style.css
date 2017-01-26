@@ -1,3 +1,5 @@
+/* Made by Maegz a.k.a. Maximilian Sundberg, YHJUST16 Lernia. */
+
 @font-face { font-family: HeaderFont; src: url('../fonts/CGF Locust Resistance.ttf'); }
 
 body {
@@ -11,15 +13,23 @@ body {
 
 .container { padding-top: 15px; width: 100%; }
 
-nav, input, button, .infoText { background-color: rgba(0, 0, 0, 0.9); }
+nav, input, button, .infoText, #aboutBox { background-color: rgba(0, 0, 0, 0.9); }
 
 input, button { border-radius: 15%; padding-left: 10px; }
 
-#infoBox { text-align: center; }
+#infoBox, #aboutBox { text-align: center; }
+
+#aboutBox {
+    height: 100%;
+    display: none;
+    position: fixed;
+    left: 0;
+    overflow: scroll;
+}
 
 #loadingImage, .titleText h1, .titleText h2, .titleText h3 {
     position: fixed;
-    width: 300px;
+    width: 150px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -102,8 +112,7 @@ input, button { border-radius: 15%; padding-left: 10px; }
 
 @media (max-width: 700px) {
     #loadingImage {
-        height: 100px;
-        width: 100px;
+        width: 75px;
     }
 
     .backgroundImage { height: 200px; }

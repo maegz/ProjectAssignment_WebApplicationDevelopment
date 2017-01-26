@@ -1,3 +1,5 @@
+<!-- Made by Maegz a.k.a. Maximilian Sundberg, YHJUST16 Lernia. -->
+
 # ProjectAssignment: Web Application Development
 ## Web application development with AJAX, JSON, jQuery, JS, HTML, CSS
 <br>
@@ -8,7 +10,7 @@
   * Web application development at Lernia YHJUST16
 
 ### Link to live project:
-[Gaze GitHub Page](https://maegz.github.io/ProjectAssignment_WebApplicationDevelopment/games.html "GitHub Pages")
+[Gaze](http://maegz.co.nf/games.html "Gaze Page")
 
 ### Short description of the project:
 I've decided to create a game search-engine.
@@ -17,16 +19,21 @@ and then be able to get information about the games in text and images.
 If the current query don't produce good enough results, another API takes action and gives
 the user optional results.
 
-### Technologies I've used:
+### What I've used:
+## Technologies:
 * HTML5
 * CSS
 * Bootstrap
 * JavaScript with jQuery
 * Ajax
-
-### APIs:
+## Tools:
+* Atom
+* Git Bash
+## API's:
 [GiantBomb](http://www.giantbomb.com/api/ "GiantBomb's API")
+  One of the biggest game information pages in the world.
 [Bing](https://www.microsoft.com/cognitive-services/en-us/bing-web-search-api/documentation "Bing's API")
+  One of the biggest search engines in the world.
 
 ### Work process:
 First of all I had to find an interesting API that would appeal to me.

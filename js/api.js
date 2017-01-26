@@ -1,3 +1,5 @@
+// Made by Maegz a.k.a. Maximilian Sundberg, YHJUST16 Lernia.
+
 "use strict";
 
 
@@ -5,18 +7,15 @@
 function API_getUserInput(input) {
     $.ajax({
         type: "GET",
-        url: "https://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
+        url: "http://www.giantbomb.com/api/search/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback&resources=game&query=" + input,
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
         success: function(data) {
             console.log(data.results);
-            // console.log(data.results);
             showDropDownList(data.results);
         },
-        error: function(err) {
-            console.log(err);
-        }
+        error: function(err) { console.log(err); }
     });
 }
 
@@ -25,12 +24,11 @@ function API_getUserInput(input) {
 function API_getGameImages(gameID) {
     $.ajax({
         type: "GET",
-        url: "https://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
+        url: "http://www.giantbomb.com/api/game/" + gameID + "/?api_key=b6a1aa5de5723bec079ca742a4dcdc29850cc623&format=jsonp&json_callback=myCallback",
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         jsonpCallback: "myCallback",
         success: function(data) {
-            console.log(data);
             var gameImages = data.results.images;
             if (gameImages.length === 0) {
                 API_getGameImagesFromWebSearch();
@@ -78,7 +76,6 @@ function API_getGameImagesFromWebSearch() {
         dataType: "json",
         success: function(data) {
             $(".backgroundImage").css("background-image", "url(" + data.value[0].contentUrl + ")").hide().fadeIn(2000);
-            console.log(data.value);
             showImages(data.value);
         },
         error: function(err) { console.log(err); },

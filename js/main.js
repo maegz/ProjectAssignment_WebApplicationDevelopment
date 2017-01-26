@@ -1,5 +1,5 @@
-// BING key: 6e0a34bcb1b64e449022c55f26f66813
-// Giant Bomb key: b6a1aa5de5723bec079ca742a4dcdc29850cc623
+// Made by Maegz a.k.a. Maximilian Sundberg, YHJUST16 Lernia.
+
 
 "use strict";
 
@@ -26,10 +26,19 @@ $(document).ready(function() {
     // Remove information when clicking within the nav-tag area
     $("nav").mousedown(function() { $("#infoBox").fadeOut(); })
     // Show information about page when mouse hovers over the questionmark.
-    $("#showBox").mouseenter(function(){ $("#infoBox").slideDown(); });
+    $("#showInfoBox").mouseenter(function() { $("#infoBox").slideDown(); });
     // Remove information when mouse leaves the questionmark.
-    $("#showBox").mouseleave(function(){ $("#infoBox").slideUp(); });
+    $("#showInfoBox").mouseleave(function() { $("#infoBox").slideUp(); });
+    // Show the about-box when clicking on the glyphicon. Hide when click on the about-box.
+    $("#showAboutBox").mousedown(function() {
+        $("#aboutBox").load("readmeForPage.html").hide().fadeIn(2000, function() {
+            $(this).mousedown(function() {
+                $(this).fadeOut();
+            });
+        });
+    });
 });
+
 
 
 // Dynamically generated dropdown-list.
@@ -143,3 +152,6 @@ function showImages(images) {
         }
     }
 }
+
+// BING key: 6e0a34bcb1b64e449022c55f26f66813
+// Giant Bomb key: b6a1aa5de5723bec079ca742a4dcdc29850cc623
